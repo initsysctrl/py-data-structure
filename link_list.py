@@ -1,6 +1,6 @@
 '''
 Date: 2021-02-15 16:55:39
-LastEditTime: 2021-02-22 18:44:23
+LastEditTime: 2021-02-22 18:49:56
 Author: Ye-P
 Descripttion: python 实现的链表结构
 '''
@@ -21,11 +21,11 @@ class LinkList():
     def __init__(self, datas: Iterable):
         """初始化,遍历数据源依次塞入链表，前后相连"""
         self._head = Node(data=datas[0])
-        current_node = self._head
+        cursor_node = self._head
         for value in datas[1:]:
             node = Node(data=value)
-            current_node._next = node
-            current_node = current_node._next
+            cursor_node._next = node
+            cursor_node = cursor_node._next
 
     def is_empty(self):
         """链表头没有节点时为空链表"""
@@ -44,35 +44,37 @@ class LinkList():
         """插入数据到指定的位置"""
         assert index >= 0, 'insert error,index<0'
         assert index < self.length(), 'insert error,index > length'
-        current_node = self._head
+        cursor_node = self._head
         pre_node = None
         i = 0
         while i <= index:
-            pre_node = current_node
-            current_node = current_node._next
+            pre_node = cursor_node
+            cursor_node = cursor_node._next
             i += 1
         # 把原链拆开，插入新的节点，连接前后
-        pre_node._next = Node(data=value, next=current_node)
+        pre_node._next = Node(data=value, next=cursor_node)
         return self
 
     def remove(self, index):
+        """删除指定位置的元素，返回自身"""
         assert index >= 0, 'remove error,index<0'
         assert index < self.length(), 'remove index >length'
-        current_node = self._head
+        cursor_node = self._head
         pre_node = None
         i = 0
         if index == 0:
             self._head = self._head._next
             return self
         while i < index:
-            pre_node = current_node
-            current_node = current_node._next
+            pre_node = cursor_node
+            cursor_node = cursor_node._nex
             i += 1
-        pre_node._next = current_node._next
-        current_node = None
+        pre_node._next = cursor_node._next
+        cursor_node = None
         return self
 
     def to_list(self):
+        """输出元素列表"""
         l = []
         temp = self._head
         while temp != None:
