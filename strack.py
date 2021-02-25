@@ -36,6 +36,9 @@ class Stack(object):
             return None
         return self.data[-1]
 
+    def clear(self):
+        del self.data[:]
+
 
 if __name__ == '__main__':
     stack = Stack(limit=5)

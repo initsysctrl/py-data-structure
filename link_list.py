@@ -1,24 +1,24 @@
 '''
 Date: 2021-02-15 16:55:39
-LastEditTime: 2021-02-22 18:50:58
+LastEditTime: 2021-02-25 22:32:56
 Author: Ye-P
 Descripttion: python 实现的链表结构
 '''
 
 
-from typing import Iterable
+from typing import Iterable, Optional
 
 
 class Node(object):
     # 单个节点
-    def __init__(self, data=None, next=None) -> None:
+    def __init__(self, data: Optional[int], next: Optional['Node'] = None) -> None:
         super().__init__()
         self._data = data  # 数值
         self._next = next  # 指针
 
 
 class LinkList():
-    def __init__(self, datas: Iterable):
+    def __init__(self, datas: list):
         """初始化,遍历数据源依次塞入链表，前后相连"""
         self._head = Node(data=datas[0])
         cursor_node = self._head
@@ -67,7 +67,7 @@ class LinkList():
             return self
         while i < index:
             pre_node = cursor_node
-            cursor_node = cursor_node._nex
+            cursor_node = cursor_node._next
             i += 1
         pre_node._next = cursor_node._next
         cursor_node = None
