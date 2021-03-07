@@ -1,6 +1,6 @@
 '''
 Date: 2021-03-08 05:31:43
-LastEditTime: 2021-03-08 06:01:26
+LastEditTime: 2021-03-08 06:33:02
 Author: Ye-P
 Descripttion: 斐波那契数列的平凡解法
 '''
@@ -20,7 +20,7 @@ def fib1(n):
 
 def fib2(n):
     """
-    带备忘录的解法，算法复杂度降低为n
+    算法复杂度降低为n
     """
     if n == 0:
         return 0
@@ -35,5 +35,24 @@ def fib2(n):
     return cure
 
 
+def fib3(n):
+    "带备忘录的解法"
+    memo = dict()
+
+    def f(n):
+        if memo.get(n):
+            return memo[n]
+        if n == 0:
+            return 0
+        if n == 1:
+            return 1
+        sub = f(n-1)+f(n-2)
+        memo[n] = sub
+        return sub
+
+    return f(n)
+
+
 n = 100
 print(fib2(n))
+print(fib3(n))
